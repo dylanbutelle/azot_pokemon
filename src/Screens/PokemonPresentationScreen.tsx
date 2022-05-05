@@ -1,23 +1,12 @@
-import {StatusBar} from 'expo-status-bar';
-import {useQuery, QueryClient, QueryClientProvider} from 'react-query';
+import {useQuery} from 'react-query';
 import {Ionicons} from '@expo/vector-icons';
-import {
-  StyleSheet,
-  Text,
-  ScrollView,
-  View,
-  SafeAreaView,
-  Image,
-  Pressable,
-} from 'react-native';
+import {StyleSheet, Text, View, Image, Pressable} from 'react-native';
 import {useState} from 'react';
-const queryClient = new QueryClient();
 
-interface Props {
-  url: object;
-}
 export default function PokemonPresentationScreen({route}: {route: any}) {
+  //Use state to know which face we need to show
   const [backOrFront, setBackOrFront] = useState(1);
+  //Get JSON from the selected pokemon
   const fetcher = () =>
     fetch(route.params.url).then(response => response.json());
   const {data, isLoading} = useQuery('GetOnePokemon', fetcher);
@@ -26,7 +15,7 @@ export default function PokemonPresentationScreen({route}: {route: any}) {
   return (
     <View style={styles.container}>
       <Text style={styles.pokemonName}>{data.name}</Text>
-
+      {/*Show the good img from the JSON */}
       <Image
         source={{
           uri: backOrFront
@@ -35,6 +24,7 @@ export default function PokemonPresentationScreen({route}: {route: any}) {
         }}
         style={styles.image}
       />
+      {/*Using our useState to set which is active with a pressable */}
       <Pressable
         onPress={() => {
           backOrFront === 1 ? setBackOrFront(0) : setBackOrFront(1);
