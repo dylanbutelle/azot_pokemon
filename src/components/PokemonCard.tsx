@@ -1,22 +1,31 @@
 import { StyleSheet, Text, View } from 'react-native';
-
+import { useFonts } from 'expo-font';
 export default function PokemonCard() {
+  const [loaded] = useFonts({
+    Pixeled: require('../../assets/fonts/Pixeled.ttf'),
+  });
+  if (!loaded) {
+    return null;
+  }
   return (
     <View style={styles.card}>
-      <Text style={styles.name}>Encore</Text>
+      <Text style={styles.name}>PIKACHU</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
-    height:90,
-	width:'90%',
+    height:100,
+	  width:'95%',
     backgroundColor: 'red',
     justifyContent:'center',
-	alignItems:'center',
+	  alignItems:'center',
+    marginBottom:20,
   },
   name:{
-	fontSize:30,
+    fontSize:20,
+    color:'white',
+    fontFamily:'Pixeled',
   }
 });
