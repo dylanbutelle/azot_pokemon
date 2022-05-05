@@ -1,15 +1,19 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { useFonts } from 'expo-font';
-export default function PokemonCard() {
+interface name{
+  name:string;
+}
+export default function PokemonCard(props : name) {
   const [loaded] = useFonts({
     Pixeled: require('../../assets/fonts/Pixeled.ttf'),
   });
   if (!loaded) {
     return null;
   }
+  
   return (
     <View style={styles.card}>
-      <Text style={styles.name}>PIKACHU</Text>
+      <Text style={styles.name}>{props.name}</Text>
     </View>
   );
 }
