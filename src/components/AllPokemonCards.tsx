@@ -1,16 +1,14 @@
-import { StatusBar } from "expo-status-bar";
-import { useQuery, QueryClient, QueryClientProvider } from "react-query";
-
-import { StyleSheet, Text, ScrollView, View, SafeAreaView } from "react-native";
+import { useQuery } from "react-query";
+import React from "react";
+import { StyleSheet, ScrollView, SafeAreaView, Pressable } from "react-native";
 import PokemonCard from "./PokemonCard";
-
 const fetcher = () =>
   fetch("https://pokeapi.co/api/v2/pokemon?limit=151").then((response) =>
     response.json()
   );
-export default function App() {
-  const { data, isLoading } = useQuery("GetAllPokemon", fetcher);
 
+export default function AllPokemonCards({ navigation }: { navigation: any }) {
+  const { data, isLoading } = useQuery("GetAllPokemon", fetcher);
   if (isLoading) return null;
   return (
     <SafeAreaView style={styles.container}>
@@ -22,8 +20,13 @@ export default function App() {
           alignItems: "center",
         }}
       >
-        {data?.results.map((item: { name: string }) => (
-          <PokemonCard name={item.name} />
+        {data?.results.map((item: { url: string; name: string }) => (
+          <Pressable
+            style={styles.press}
+            onPress={() => navigation.navigate("Pokemon", { url: item.url })}
+          >
+            <PokemonCard name={item.name} url={item.url} />
+          </Pressable>
         ))}
       </ScrollView>
     </SafeAreaView>
@@ -34,5 +37,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: "100%",
+  },
+  press: {
+    width: "100%",
+    alignItems: "center",
   },
 });
