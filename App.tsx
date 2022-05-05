@@ -1,7 +1,7 @@
 import {QueryClient, QueryClientProvider} from 'react-query';
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import AllPokemonCards from './src/components/AllPokemonCards';
+import AllPokemonCards from './src/Screens/AllPokemonCards';
 import {NavigationContainer} from '@react-navigation/native';
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';

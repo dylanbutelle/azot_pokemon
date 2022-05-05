@@ -1,7 +1,7 @@
 import {useQuery} from 'react-query';
 import React from 'react';
 import {StyleSheet, ScrollView, SafeAreaView, Pressable} from 'react-native';
-import PokemonCard from './PokemonCard';
+import PokemonCard from '../components/PokemonCard';
 //Get JSON from the API https://pokeapi.co/
 const fetcher = () =>
   fetch('https://pokeapi.co/api/v2/pokemon?limit=151').then(response =>
